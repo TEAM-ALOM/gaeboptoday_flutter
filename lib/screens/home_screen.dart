@@ -1,6 +1,7 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:gaeboptoday_flutter/controllers/dafault_cards.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,12 +26,22 @@ class _HomeScreenState extends State<HomeScreen> {
           // title: const Text("Title"),
         ),
       ),
+      // backgroundColor: Colors.gr,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("4월 30일 존맛탱구리 식사"),
+              const Text(
+                "안녕하세요 좋은 아침이에요!",
+                style: TextStyle(fontWeight: FontWeight.w100, fontSize: 28),
+              ),
+              const Text(
+                "4월 30일의 계밥입니다.",
+                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
+              ),
+              const SizedBox(height: 10),
               Center(
                 child: AnimatedToggleSwitch<int>.size(
                   current: currentIndex,
@@ -78,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 200,
                 child: Swiper(
+                  loop: false,
                   itemBuilder: (BuildContext context, int index) {
                     return cardWidgetList[index];
                   },
@@ -110,18 +122,9 @@ Color colorBuilder(int value) => switch (value) {
       _ => Colors.blueAccent,
     };
 List<Card> cardWidgetList = [
-  Card(
-    elevation: 3,
-    child: Text(foodString[1].toString()),
-  ),
-  const Card(
-    elevation: 3,
-    child: Text("2"),
-  ),
-  const Card(
-    elevation: 3,
-    child: Text("3"),
-  ),
+  menuCard(foodString[0], 4.5),
+  menuCard(foodString[1], 4.5),
+  menuCard(foodString[2], 4.5),
 ];
 List<List<String>> foodString = [
   ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],

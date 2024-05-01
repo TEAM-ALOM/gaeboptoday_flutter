@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
       home: const BottomBarWidget(),
@@ -69,10 +70,17 @@ class BottomBarWidget extends StatefulWidget {
 class _BottomBarWidgetState extends State<BottomBarWidget> {
   int visit = 0;
   double height = 30;
+  // Color colorSelect = Colors.white;
   Color colorSelect = const Color(0XFF0686F8);
-  Color color = const Color.fromARGB(255, 78, 136, 186);
-  Color color2 = const Color(0XFF96B1FD);
-  Color bgColor = const Color(0XFF1752FE);
+
+  Color color = const Color.fromARGB(255, 164, 224, 249);
+  // Color color2 = const Color(0XFF96B1FD);
+  Color color2 = const Color.fromRGBO(255, 255, 255, 1);
+  // Color color2 = const Color.fromRGBO(255, 255, 255, 1);
+
+  // Color bgColor = const Color.fromRGBO(66, 126, 238, 255);
+  Color bgColor = const Color.fromARGB(255, 66, 126, 238);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,9 +90,9 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
       body: viewWidgets[visit],
       bottomNavigationBar: BottomBarInspiredInside(
         items: items,
-        backgroundColor: Colors.white,
-        color: color2,
-        colorSelected: Colors.white,
+        backgroundColor: bgColor,
+        color: Colors.white,
+        colorSelected: color2,
         indexSelected: visit,
         onTap: (int index) => setState(() {
           visit = index;
