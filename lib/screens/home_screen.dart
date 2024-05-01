@@ -1,8 +1,6 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,7 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int value = 0;
+  int currentIndex = 0;
+  final SwiperController _swiperController = SwiperController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Text("4월 30일 존맛탱구리 식사"),
               Center(
                 child: AnimatedToggleSwitch<int>.size(
-                  current: value,
+                  current: currentIndex,
                   values: const [0, 1, 2],
                   iconOpacity: 0.2,
                   indicatorSize: const Size.fromWidth(100),
@@ -59,17 +58,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   styleBuilder: (i) =>
                       ToggleStyle(indicatorColor: colorBuilder(i)),
-                  onChanged: (i) => setState(() => value = i),
+                  onChanged: (i) => setState(() {
+                    currentIndex = i;
+                    _swiperController.move(currentIndex);
+                  }),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              cardWidgetList[value].animate().fade(),
-              Animate(
-                effects: const [FadeEffect(), ScaleEffect()],
-                child: cardWidgetList[value],
+
+              SizedBox(
+                height: 200,
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return cardWidgetList[index];
+                  },
+                  onIndexChanged: (v) => setState(() {
+                    currentIndex = v;
+                  }),
+                  index: currentIndex,
+                  itemCount: cardWidgetList.length,
+                  viewportFraction: 1,
+                  scale: 0.8,
+                  controller: _swiperController,
+                ),
               ),
+              // Animate(
+              //   effects: const [FadeEffect(), ScaleEffect()],
+              //   child:
+              // ),
             ],
           ),
         ),
@@ -85,26 +103,17 @@ Color colorBuilder(int value) => switch (value) {
       _ => Colors.blueAccent,
     };
 List<Card> cardWidgetList = [
-  const Card(
+  Card(
     elevation: 3,
-    child: SizedBox(
-      height: 400,
-      child: Placeholder(),
-    ),
+    child: Text(foodString[1].toString()),
   ),
   const Card(
     elevation: 3,
-    child: SizedBox(
-      height: 300,
-      child: Placeholder(),
-    ),
+    child: Text("2"),
   ),
   const Card(
     elevation: 3,
-    child: SizedBox(
-      height: 400,
-      child: Placeholder(),
-    ),
+    child: Text("3"),
   ),
 ];
 List<List<String>> foodString = [

@@ -1,3 +1,4 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/widgets.dart';
 
 class MonthlyView extends StatefulWidget {
