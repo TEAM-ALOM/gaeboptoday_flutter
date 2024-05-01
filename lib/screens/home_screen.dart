@@ -1,7 +1,9 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gaeboptoday_flutter/controllers/dafault_cards.dart';
+import 'package:gaeboptoday_flutter/controllers/food_card.dart';
+import 'package:gaeboptoday_flutter/controllers/menu_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -107,6 +109,28 @@ class _HomeScreenState extends State<HomeScreen> {
               //   effects: const [FadeEffect(), ScaleEffect()],
               //   child:
               // ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "인기 메뉴를 살펴보세요!",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    foodCard(),
+                    foodCard(),
+                    foodCard(),
+                    foodCard(),
+                    foodCard(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
