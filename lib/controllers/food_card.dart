@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:like_button/like_button.dart';
 
 Card foodCard() {
   return Card(
@@ -19,9 +22,15 @@ Card foodCard() {
           const SizedBox(
             height: 10,
           ),
-          const Text(
-            "제육볶음",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "제육볶음",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ],
           ),
           RatingBarIndicator(
             rating: 4.3,

@@ -9,19 +9,19 @@ import 'package:gaeboptoday_flutter/screens/review_screen.dart';
 List<TabItem> items = [
   const TabItem(
     icon: Icons.home,
-    // title: '홈',
+    title: '홈',
   ),
   const TabItem(
     icon: Icons.calendar_month,
-    // title: '월간 보기',
+    title: '월간계밥',
   ),
   const TabItem(
     icon: Icons.star,
-    // title: '리뷰',
+    title: '리뷰',
   ),
   const TabItem(
     icon: Icons.account_circle,
-    // title: 'Cart',
+    title: '마이페이지',
   ),
   // TabItem(
   //   icon: Icons.account_box,
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Pretendard',
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
@@ -90,8 +91,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
       body: viewWidgets[visit],
       bottomNavigationBar: BottomBarInspiredInside(
         items: items,
-        backgroundColor: bgColor,
-        color: Colors.white,
+        backgroundColor: Colors.white,
+        color: bgColor,
         colorSelected: color2,
         indexSelected: visit,
         onTap: (int index) => setState(() {

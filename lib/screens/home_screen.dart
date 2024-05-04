@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const Text(
                 "안녕하세요 좋은 아침이에요!",
-                style: TextStyle(fontWeight: FontWeight.w100, fontSize: 28),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
               ),
               const Text(
                 "4월 30일의 계밥입니다.",
