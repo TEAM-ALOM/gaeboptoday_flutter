@@ -57,9 +57,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(
                       text,
                       style: TextStyle(
-                          color: Color.lerp(
-                              Colors.black, Colors.white, local.animationValue),
-                          fontWeight: FontWeight.bold),
+                        color: Color.lerp(
+                            Colors.black, Colors.white, local.animationValue),
+                        fontWeight: currentIndex != local.index
+                            ? FontWeight.normal
+                            : FontWeight.bold,
+                      ),
                     ));
                   },
                   borderWidth: 4.0,
