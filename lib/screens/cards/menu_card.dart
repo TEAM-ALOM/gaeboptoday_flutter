@@ -46,14 +46,14 @@ Card menuCard(List<String> value, double rate) {
                               itemCount: 6,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(bottom: 2.0),
+                                  padding: const EdgeInsets.only(bottom: 5.0),
                                   child: AutoSizeText(
                                     maxLines: 2,
                                     value[index],
                                     // minFontSize: 14,
                                     // group: fontSizeGroup,
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 14,
                                     ),
                                   ),
@@ -69,14 +69,14 @@ Card menuCard(List<String> value, double rate) {
                               itemCount: 5,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(bottom: 6.0),
+                                  padding: const EdgeInsets.only(bottom: 8.0),
                                   child: AutoSizeText(
                                     value[index + 5],
                                     // minFontSize: 14,
                                     // group: fontSizeGroup,
                                     maxLines: 2,
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w700,
                                       fontSize: 14,
                                     ),
                                     overflow: TextOverflow.ellipsis,

@@ -2,8 +2,8 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gaeboptoday_flutter/controllers/food_card.dart';
-import 'package:gaeboptoday_flutter/controllers/menu_card.dart';
+import 'package:gaeboptoday_flutter/screens/cards/food_card.dart';
+import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -155,20 +155,7 @@ List<Card> cardWidgetList = [
   menuCard(foodString[2], 4.5),
 ];
 List<List<String>> foodString = [
-  [
-    "딸기",
-    "당근",
-    "수박",
-    "삐쓰까또레부르쥬미첼라햄페스츄리치즈나쵸스트링스파게티",
-    "메론",
-    "게임",
-    "딸기",
-    "당근",
-    "수박",
-    "참외",
-    "메론",
-    "게임"
-  ],
+  ["딸기", "당근", "수박", "제육볶음", "메론", "게임", "딸기", "당근", "수박", "참외", "메론", "게임"],
   ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],
   ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],
 ];
