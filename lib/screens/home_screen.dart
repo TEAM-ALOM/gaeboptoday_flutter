@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           // backgroundColor: const Color(0x44000000),
           elevation: 0,
           // title: const Text("Title"),
@@ -35,15 +35,16 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "안녕하세요 좋은 아침이에요!",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-              ),
-              const Text(
-                "4월 30일의 계밥입니다.",
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
-              ),
               const SizedBox(height: 10),
+              const Text(
+                "좋은 아침이에요! 👨🏻‍🍳",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              ),
+              const Text(
+                "오늘의 계밥 식단입니다.",
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19),
+              ),
+              const SizedBox(height: 20),
               Center(
                 child: AnimatedToggleSwitch<int>.size(
                   current: currentIndex,
@@ -88,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
 
               SizedBox(
@@ -154,7 +155,20 @@ List<Card> cardWidgetList = [
   menuCard(foodString[2], 4.5),
 ];
 List<List<String>> foodString = [
-  ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],
+  [
+    "딸기",
+    "당근",
+    "수박",
+    "삐쓰까또레부르쥬미첼라햄페스츄리치즈나쵸스트링스파게티",
+    "메론",
+    "게임",
+    "딸기",
+    "당근",
+    "수박",
+    "참외",
+    "메론",
+    "게임"
+  ],
   ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],
   ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],
 ];

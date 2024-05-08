@@ -6,6 +6,7 @@ import 'package:like_button/like_button.dart';
 
 Card foodCard() {
   return Card(
+    color: Colors.white,
     child: SizedBox(
       height: 200,
       width: 150,
