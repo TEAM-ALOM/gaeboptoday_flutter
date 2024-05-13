@@ -1,4 +1,5 @@
 import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
@@ -34,7 +35,16 @@ const List<Widget> viewWidgets = [
   Review(),
   MyPage(),
 ];
-void main() {
+// 사용가능한 카메라 장치의 목록을 저장하는 변수
+late List<CameraDescription> _cameras;
+Future<void> main() async {
+  // 앱이 실행되기 전에 필요한 초기화 작업을 수행하는 메서드
+  // main 함수에서만 호출 가능
+  // 사용가능한 카메라를 확인하기 위함
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 사용 가능한 카메라 확인
+  _cameras = await availableCameras();
   runApp(const MyApp());
 }
 
