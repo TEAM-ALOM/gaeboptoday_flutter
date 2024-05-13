@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>식단 사진 업로드를 위하여 사용됩니다!</string>
+	<key>NSCameraUsageDescription</key>
+	<string>식단 사진 업로드를 위하여 사용됩니다!</string>
+	<!-- <key>NSMicrophoneUsageDescription</key>
+	<string>your usage description here</string> -->
 </dict>
 </plist>

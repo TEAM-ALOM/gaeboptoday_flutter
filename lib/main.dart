@@ -88,6 +88,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
       // appBar: AppBar(
       //   title: Text(widget.title),
       // ),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.camera), onPressed: () {}),
       body: viewWidgets[visit],
       bottomNavigationBar: BottomBarInspiredInside(
         items: items,
