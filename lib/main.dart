@@ -2,6 +2,7 @@ import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
+import 'package:gaeboptoday_flutter/screens/camera_screen.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
 import 'package:gaeboptoday_flutter/screens/monthly_view_screen.dart';
 import 'package:gaeboptoday_flutter/screens/mypage_screen.dart';
@@ -99,7 +100,13 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
       //   title: Text(widget.title),
       // ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.camera), onPressed: () {}),
+          child: const Icon(Icons.camera),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => CameraScreen(
+                      cameras: _cameras,
+                    )));
+          }),
       body: viewWidgets[visit],
       bottomNavigationBar: BottomBarInspiredInside(
         items: items,
