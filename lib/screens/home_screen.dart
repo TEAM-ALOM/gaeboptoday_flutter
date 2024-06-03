@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
-          backgroundColor: Colors.white,
+          // backgroundColor: Colors.white,s
           // backgroundColor: const Color(0x44000000),
           elevation: 0,
           // title: const Text("Title"),

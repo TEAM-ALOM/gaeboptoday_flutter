@@ -1,12 +1,10 @@
-import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
-import 'package:gaeboptoday_flutter/screens/camera_screen.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
 import 'package:gaeboptoday_flutter/screens/monthly_view_screen.dart';
 import 'package:gaeboptoday_flutter/screens/mypage_screen.dart';
 import 'package:gaeboptoday_flutter/screens/review_screen.dart';
+import 'package:gaeboptoday_flutter/screens/upload_screen.dart';
 
 List<TabItem> items = [
   const TabItem(
@@ -37,15 +35,15 @@ const List<Widget> viewWidgets = [
   MyPage(),
 ];
 // 사용가능한 카메라 장치의 목록을 저장하는 변수
-late List<CameraDescription> _cameras;
+// late List<CameraDescription> _cameras;
 Future<void> main() async {
   // 앱이 실행되기 전에 필요한 초기화 작업을 수행하는 메서드
   // main 함수에서만 호출 가능
   // 사용가능한 카메라를 확인하기 위함
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
 
-  // 사용 가능한 카메라 확인
-  _cameras = await availableCameras();
+  // // 사용 가능한 카메라 확인
+  // _cameras = await availableCameras();
   runApp(const MyApp());
 }
 
@@ -60,6 +58,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Pretendard',
         brightness: Brightness.light,
+        colorScheme: const ColorScheme.light(
+          primary: Colors.blue,
+        ),
         primarySwatch: Colors.blue,
       ),
       home: const BottomBarWidget(),
@@ -83,15 +84,18 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
   int visit = 0;
   double height = 30;
   // Color colorSelect = Colors.white;
-  Color colorSelect = const Color(0XFF0686F8);
+  Color coloSelect = const Color(0XFF0686F8);
 
-  Color color = const Color.fromARGB(255, 164, 224, 249);
+  // Color color = const Color.fromARGB(255, 164, 224, 249);
+  Color color = Colors.grey;
+
   // Color color2 = const Color(0XFF96B1FD);
+
   Color color2 = const Color.fromRGBO(255, 255, 255, 1);
   // Color color2 = const Color.fromRGBO(255, 255, 255, 1);
 
-  // Color bgColor = const Color.fromRGBO(66, 126, 238, 255);
-  Color bgColor = const Color.fromARGB(255, 66, 126, 238);
+  Color bgColor = Colors.blueAccent;
+  // Color bgColor = const Color.fromARGB(255, 66, 126, 238);
 
   @override
   Widget build(BuildContext context) {
@@ -102,24 +106,21 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.camera),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => CameraScreen(
-                      cameras: _cameras,
-                    )));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const UploadScreen()));
           }),
       body: viewWidgets[visit],
-      bottomNavigationBar: BottomBarInspiredInside(
+      bottomNavigationBar: BottomBarDefault(
         items: items,
         backgroundColor: Colors.white,
-        color: bgColor,
-        colorSelected: color2,
+        color: color,
+        colorSelected: bgColor,
         indexSelected: visit,
         onTap: (int index) => setState(() {
           visit = index;
-          print(visit);
         }),
-        chipStyle: const ChipStyle(convexBridge: true),
-        itemStyle: ItemStyle.circle,
+        // chipStyle: const ChipStyle(convexBridge: true),
+        // itemStyle: ItemStyle.circle,
         animated: true,
       ),
     );
