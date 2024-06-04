@@ -1,12 +1,8 @@
 PODS:
-  - camera_avfoundation (0.0.1):
-    - Flutter
   - edge_detection (1.1.3):
     - Flutter
     - WeScan
   - Flutter (1.0.0)
-  - flutter_doc_scanner (0.0.1):
-    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -15,23 +11,17 @@ PODS:
   - WeScan (3.0.0)
 
 DEPENDENCIES:
-  - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - edge_detection (from `.symlinks/plugins/edge_detection/ios`)
   - Flutter (from `Flutter`)
-  - flutter_doc_scanner (from `.symlinks/plugins/flutter_doc_scanner/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - WeScan (from `.symlinks/plugins/edge_detection/ios/WeScan-3.0.0`)
 
 EXTERNAL SOURCES:
-  camera_avfoundation:
-    :path: ".symlinks/plugins/camera_avfoundation/ios"
   edge_detection:
     :path: ".symlinks/plugins/edge_detection/ios"
   Flutter:
     :path: Flutter
-  flutter_doc_scanner:
-    :path: ".symlinks/plugins/flutter_doc_scanner/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
@@ -40,14 +30,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/edge_detection/ios/WeScan-3.0.0"
 
 SPEC CHECKSUMS:
-  camera_avfoundation: 759172d1a77ae7be0de08fc104cfb79738b8a59e
   edge_detection: ca7942eecdfb4acb1de11cb9300c42242acb5679
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_doc_scanner: cd7ad8a27227cd7e8ccce50951623678cbde0ec6
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   WeScan: f50277f7304d146d9ebc4ebdc1b587df84dcdd8b
 
-PODFILE CHECKSUM: f0c2be11889b53629ba963971cd98018ce1a26c5
+PODFILE CHECKSUM: 0a47818728d2e20e3a43412121bb0685c896451b
 
 COCOAPODS: 1.14.3

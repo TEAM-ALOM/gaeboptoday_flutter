@@ -1,6 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/material.dart';
-import 'package:gaeboptoday_flutter/screens/camera_screen.dart';
+import 'package:gap/gap.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -15,10 +16,11 @@ class UploadScreen extends StatefulWidget {
 
 class _UploadScreenState extends State<UploadScreen> {
   bool cameraOpened = false;
+  String imagePath = "not opened";
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
 
-  void _doSomething() async {
+  void menuUpload() async {
     // Check permissions and request its
     bool isCameraGranted = await Permission.camera.request().isGranted;
     if (!isCameraGranted) {
@@ -32,73 +34,63 @@ class _UploadScreenState extends State<UploadScreen> {
     }
 
 // Generate filepath for saving
-    String imagePath = join((await getApplicationSupportDirectory()).path,
+    imagePath = join((await getApplicationSupportDirectory()).path,
         "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
-
-// Use below code for live camera detection with option to select from gallery in the camera feed.
+    // print(imagePath);
+    // Use below code for live camera detection with option to select from gallery in the camera feed.
 
     try {
       //Make sure to await the call to detectEdge.
-      bool success = await EdgeDetection.detectEdge(
+      cameraOpened = await EdgeDetection.detectEdge(
         imagePath,
-        canUseGallery: true,
-        androidScanTitle: 'Scanning', // use custom localizations for android
-        androidCropTitle: 'Crop',
+        canUseGallery: false,
+        androidScanTitle: '스캔하기', // use custom localizations for android
+        androidCropTitle: '잘라내기',
         androidCropBlackWhiteTitle: 'Black White',
-        androidCropReset: 'Reset',
+        androidCropReset: '재설정',
       );
     } catch (e) {
       print(e);
     }
-
-// Use below code for selecting directly from the gallery.
-
-    try {
-      //Make sure to await the call to detectEdgeFromGallery.
-      bool success = await EdgeDetection.detectEdgeFromGallery(
-        imagePath,
-        androidCropTitle: 'Crop', // use custom localizations for android
-        androidCropBlackWhiteTitle: 'Black White',
-        androidCropReset: 'Reset',
-      );
-    } catch (e) {
-      print(e);
-    }
+    // print(cameraOpened);
     setState(() {
       _btnController.success();
-      // cameraOpened = true;
     });
-
-    // print(cameraOpened);
-    // Timer(const Duration(seconds: 3), () {
-    //   _btnController.success();
-    // });
   }
-// Use the `FlutterDocScanner` class to start the document scanning process.
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("계절밥상 식단표 업로드"),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            cameraOpened
-                ? Expanded(
-                    child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    // child: CameraScreen(cameras: widget.cameras),
-                    // child: FlutterDocScanner().getScanDocuments(),
-                  ))
-                : RoundedLoadingButton(
-                    controller: _btnController,
-                    onPressed: _doSomething,
-                    child: const Text('Tap me!',
-                        style: TextStyle(color: Colors.white)),
-                  )
+            Image.asset("assets/images/camera_access.png"),
+            const Gap(30),
+            const AutoSizeText(
+              "계절밥상 식단표를 촬영해주세요.",
+              minFontSize: 25,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const AutoSizeText(
+              "이미지 업로드를 위하여 카메라 권한을 허용해주세요!",
+              minFontSize: 18,
+              style: TextStyle(fontWeight: FontWeight.normal),
+            ),
+            const Gap(130),
+            // Text(imagePath),
+            RoundedLoadingButton(
+              controller: _btnController,
+              onPressed: menuUpload,
+              child: const Text('업로드 시작 !',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            )
           ],
         ),
       ),
