@@ -52,9 +52,14 @@ class _UploadScreenState extends State<UploadScreen> {
     } catch (e) {
       print(e);
     }
-    // print(cameraOpened);
+    print(cameraOpened);
     setState(() {
-      _btnController.success();
+      //btn reset when shoot canceled
+      if (cameraOpened) {
+        _btnController.success();
+      } else {
+        _btnController.reset();
+      }
     });
   }
 
