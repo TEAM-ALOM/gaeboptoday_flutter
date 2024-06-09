@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:gaeboptoday_flutter/controllers/menu_json_to_string_list.dart';
+import 'package:gaeboptoday_flutter/controllers/menu_json_to_string_list.dart';
 import 'package:gaeboptoday_flutter/screens/cards/added_menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
 import 'package:gap/gap.dart';
@@ -23,7 +24,7 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
   late List<Map<String, List<String>>> receivedMenuData;
   @override
   void initState() {
-    receivedMenuData = MenuJsonToStringList(widget.menuJsonData);
+    receivedMenuData = menuJsonToStringList(widget.menuJsonData);
     print(receivedMenuData);
     super.initState();
   }
@@ -47,9 +48,9 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // const Gap(70),
-            Column(
+            const Column(
               children: [
-                const AutoSizeText(
+                AutoSizeText(
                   "성공적으로 메뉴를 읽었습니다!",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -57,16 +58,18 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
                   ),
                   minFontSize: 20,
                 ),
-                const AutoSizeText(
+                AutoSizeText(
                   "메뉴를 제보해주셔서 감사합니다 :)",
                   minFontSize: 15,
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      MenuJsonToStringList(widget.menuJsonData);
-                      // print(widget.menuJsonData);
-                    },
-                    child: const Text("data")),
+                // ElevatedButton(
+                //     onPressed: () {
+                //       // print(dateIndex);
+                //       menuJsonToStringList(widget.menuJsonData);
+                //       // print(widget.menuJsonData);
+                //       // print(receivedMenuData[dateIndex]);
+                //     },
+                //     child: const Text("data")),
               ],
             ),
             const Gap(40),

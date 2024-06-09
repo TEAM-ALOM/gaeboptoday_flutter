@@ -153,6 +153,8 @@ List<Card> cardWidgetList = [
   menuCard(foodString[0], 4.5),
   menuCard(foodString[1], 4.5),
   menuCard(foodString[2], 4.5),
+  menuCard(foodString[2], 4.5),
+  menuCard(foodString[2], 4.5),
 ];
 //TODO: USE CARD + FUTURE BUILDER to manage data card
 List<List<String>> foodString = [
