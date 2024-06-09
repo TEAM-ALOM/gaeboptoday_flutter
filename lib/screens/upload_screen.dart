@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dio/dio.dart';
 import 'package:edge_detection/edge_detection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,6 +16,7 @@ import 'package:gap/gap.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
 
@@ -28,6 +30,7 @@ class UploadScreen extends StatefulWidget {
 class _UploadScreenState extends State<UploadScreen> {
   bool cameraOpened = false;
   String imagePath = "NOT OPENED";
+  double percent = 0;
   late File menuImage;
   final dio = Dio();
   final RoundedLoadingButtonController _btnController =
@@ -80,15 +83,19 @@ class _UploadScreenState extends State<UploadScreen> {
         'http://52.79.88.147:3000/api/menu/upload',
         data: formData,
         onSendProgress: (int sent, int total) {
-          print('$sent $total');
+          setState(() {
+            percent = sent / total;
+          });
+          // print('$sent $total');
         },
       );
-      final result = ImageGallerySaver.saveImage(bytes);
+      //TODO: SAVE CROPPED IMAGE DISABLE
+      ImageGallerySaver.saveImage(bytes);
       print(response);
       setState(() {
         //btn reset when shoot canceled
 
-        print(result);
+        // print(result);
         Timer(const Duration(seconds: 1), () {
           _btnController.success();
         });
@@ -138,8 +145,37 @@ class _UploadScreenState extends State<UploadScreen> {
               minFontSize: 18,
               style: const TextStyle(fontWeight: FontWeight.normal),
             ),
-            const Gap(130),
+            cameraOpened
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Gap(20),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: LinearPercentIndicator(
+                          // width: MediaQuery.of(context).devicePixelRatio,
+                          animation: true,
+                          lineHeight: 20.0,
+                          // animationDuration: 2000,
+                          percent: percent,
+                          center: Text(
+                            "${(percent * 100).toString()}%",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: ui.FontWeight.bold,
+                            ),
+                          ),
+                          barRadius: const ui.Radius.circular(20),
+                          progressColor: Colors.blueAccent,
+                        ),
+                      ),
+                      const Gap(90),
+                    ],
+                  )
+                : const Gap(130),
             // Text(imagePath),
+
             RoundedLoadingButton(
               controller: _btnController,
               onPressed: menuUpload,

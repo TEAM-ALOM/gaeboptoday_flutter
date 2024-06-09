@@ -154,6 +154,7 @@ List<Card> cardWidgetList = [
   menuCard(foodString[1], 4.5),
   menuCard(foodString[2], 4.5),
 ];
+//TODO: USE CARD + FUTURE BUILDER to manage data card
 List<List<String>> foodString = [
   ["딸기", "당근", "수박", "제육볶음", "메론", "게임", "딸기", "당근", "수박", "참외", "메론", "게임"],
   ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],
