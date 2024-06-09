@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '오늘의 계밥',
       theme: ThemeData(
         fontFamily: 'Pretendard',
         brightness: Brightness.light,
@@ -104,6 +104,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
       //   title: Text(widget.title),
       // ),
       floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blueAccent,
           child: const Icon(Icons.camera),
           onPressed: () {
             Navigator.of(context).push(

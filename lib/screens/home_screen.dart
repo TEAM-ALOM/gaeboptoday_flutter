@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gaeboptoday_flutter/screens/cards/food_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
+import 'package:gap/gap.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -38,11 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 10),
               const Text(
                 "좋은 아침이에요! 👨🏻‍🍳",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
               ),
               const Text(
                 "오늘의 계밥 식단입니다.",
-                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19),
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
               ),
               const SizedBox(height: 20),
               Center(
@@ -58,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(
                       text,
                       style: TextStyle(
+                        fontSize: 13,
                         color: Color.lerp(
                             Colors.black, Colors.white, local.animationValue),
                         fontWeight: currentIndex != local.index
@@ -74,9 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     boxShadow: [
                       const BoxShadow(
                         color: Colors.black26,
-                        spreadRadius: 1,
-                        blurRadius: 2,
-                        offset: Offset(0, 1.5),
+                        spreadRadius: 0.1,
+                        blurRadius: 1,
+                        offset: Offset(0, 0.3),
                       ),
                     ],
                   ),
@@ -88,9 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   }),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const Gap(20),
 
               SizedBox(
                 height: 200,
@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const Text(
                 "인기 메뉴를 살펴보세요!",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 10,
@@ -152,6 +152,8 @@ Color colorBuilder(int value) => switch (value) {
 List<Card> cardWidgetList = [
   menuCard(foodString[0], 4.5),
   menuCard(foodString[1], 4.5),
+  menuCard(foodString[2], 4.5),
+  menuCard(foodString[2], 4.5),
   menuCard(foodString[2], 4.5),
 ];
 //TODO: USE CARD + FUTURE BUILDER to manage data card

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:gap/gap.dart';
 
 // autosize group
 var fontSizeGroup = AutoSizeGroup();
@@ -53,15 +54,15 @@ Card menuCard(List<String> value, double rate) {
                                     // minFontSize: 14,
                                     // group: fontSizeGroup,
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 13,
                                     ),
                                   ),
                                 );
                               },
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          const Gap(20),
                           Expanded(
                             child: ListView.builder(
                               shrinkWrap: true,
@@ -76,8 +77,8 @@ Card menuCard(List<String> value, double rate) {
                                     // group: fontSizeGroup,
                                     maxLines: 2,
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 13,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),

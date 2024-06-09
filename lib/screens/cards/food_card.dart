@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gaeboptoday_flutter/controllers/circle_image.dart';
+import 'package:gap/gap.dart';
 import 'package:like_button/like_button.dart';
 
 Card foodCard() {
@@ -24,10 +25,11 @@ Card foodCard() {
             children: [
               Text(
                 "제육볶음",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ],
           ),
+          const Gap(3),
           RatingBarIndicator(
             rating: 4.3,
             itemBuilder: (context, index) => const Icon(
@@ -35,7 +37,7 @@ Card foodCard() {
               color: Colors.amber,
             ),
             itemCount: 5,
-            itemSize: 20.0,
+            itemSize: 17.0,
             // direction: Axis.vertical,
           ),
         ],

@@ -7,6 +7,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dio/dio.dart';
 import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/painting.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -147,7 +148,10 @@ class _UploadScreenState extends State<UploadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("계절밥상 식단표 업로드"),
+        title: const Text(
+          "계절밥상 식단표 업로드",
+          style: TextStyle(fontWeight: ui.FontWeight.bold, fontSize: 18),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -169,8 +173,10 @@ class _UploadScreenState extends State<UploadScreen> {
             AutoSizeText(
               cameraOpened
                   ? "이미지를 읽는 중입니다."
-                  : (errorOccured ? "읽는 중 에러가 발생하였습니다." : "계절밥상 식단표를 촬영해주세요."),
-              minFontSize: 25,
+                  : (errorOccured
+                      ? "❌ 읽는 중 에러가 발생하였습니다. ❌"
+                      : "계절밥상 식단표를 촬영해주세요."),
+              minFontSize: 20,
               maxLines: 1,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -180,7 +186,7 @@ class _UploadScreenState extends State<UploadScreen> {
                   : errorOccured
                       ? "계절밥상 식단표를 다시 촬영해주세요!"
                       : "이미지 업로드를 위하여 카메라 권한을 허용해주세요!",
-              minFontSize: 18,
+              minFontSize: 13,
               maxLines: 1,
               style: const TextStyle(fontWeight: FontWeight.normal),
             ),
@@ -199,7 +205,7 @@ class _UploadScreenState extends State<UploadScreen> {
                           // animationDuration: 2000,
                           percent: percent,
                           center: Text(
-                            "${(percent * 100).toString()}%",
+                            "${(percent * 100).toInt().toString()}%",
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: ui.FontWeight.bold,
@@ -215,23 +221,43 @@ class _UploadScreenState extends State<UploadScreen> {
                 : errorOccured
                     ? Column(
                         children: [
-                          const Gap(20),
-                          AutoSizeText(
-                            "ERROR $errorCode : $errorMessage (\"$errorString\")",
-                            maxLines: 1,
+                          const Gap(75),
+                          Container(
+                            decoration: const BoxDecoration(
+                                // color: Colors.orange,
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: AutoSizeText(
+                                "ERROR $errorCode : $errorMessage (\"$errorString\")",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: ui.FontWeight.w300,
+                                ),
+                                minFontSize: 10,
+                                maxLines: 1,
+                              ),
+                            ),
                           ),
-                          const Gap(90),
+                          const Gap(5),
                         ],
                       )
                     : const Gap(130),
             // Text(imagePath),
 
             RoundedLoadingButton(
+              successColor: Colors.blueAccent,
+              color: Colors.blueAccent,
               controller: _btnController,
               onPressed: menuUpload,
               child: const Text('업로드 시작 !',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  )),
             )
           ],
         ),
