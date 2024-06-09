@@ -2,6 +2,8 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:gaeboptoday_flutter/controllers/menu_json_to_string_list.dart';
+import 'package:gaeboptoday_flutter/screens/cards/added_menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
@@ -18,9 +20,11 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
   final SwiperController _swiperController = SwiperController();
   final RoundedLoadingButtonController _roundedLoadingButtonController =
       RoundedLoadingButtonController();
+  late List<Map<String, List<String>>> receivedMenuData;
   @override
   void initState() {
-    print(widget.menuJsonData);
+    receivedMenuData = MenuJsonToStringList(widget.menuJsonData);
+    print(receivedMenuData);
     super.initState();
   }
 
@@ -43,9 +47,9 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // const Gap(70),
-            const Column(
+            Column(
               children: [
-                AutoSizeText(
+                const AutoSizeText(
                   "성공적으로 메뉴를 읽었습니다!",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -53,10 +57,16 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
                   ),
                   minFontSize: 20,
                 ),
-                AutoSizeText(
+                const AutoSizeText(
                   "메뉴를 제보해주셔서 감사합니다 :)",
                   minFontSize: 15,
                 ),
+                ElevatedButton(
+                    onPressed: () {
+                      MenuJsonToStringList(widget.menuJsonData);
+                      // print(widget.menuJsonData);
+                    },
+                    child: const Text("data")),
               ],
             ),
             const Gap(40),
@@ -136,7 +146,7 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
                         loop: false,
                         itemBuilder: (BuildContext context, int index) {
                           // return Text(index.toString());
-                          return cardWidgetList[index];
+                          return addedMenuCard(receivedMenuData[index]);
                         },
                         onIndexChanged: (v) => setState(() {
                           dateIndex = v;
