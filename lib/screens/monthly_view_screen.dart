@@ -10,6 +10,13 @@ class MonthlyView extends StatefulWidget {
 
 class _MonthlyViewState extends State<MonthlyView> {
   @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const Placeholder();
   }
