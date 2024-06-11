@@ -1,10 +1,15 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:card_loading/card_loading.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gaeboptoday_flutter/screens/cards/food_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
+import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
 import 'package:gap/gap.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -150,10 +155,13 @@ Color colorBuilder(int value) => switch (value) {
       _ => Colors.blueAccent,
     };
 List<Card> cardWidgetList = [
-  menuCard(foodString[0], 4.5),
-  menuCard(foodString[1], 4.5),
-  menuCard(foodString[2], 4.5),
-  menuCard(foodString[2], 4.5),
+  noDataCard("현재 천원의 아침밥은 식단표 제공이 되지 않습니다."),
+  Card(
+    child: LoadingAnimationWidget.inkDrop(
+      color: Colors.blueAccent,
+      size: 30,
+    ),
+  ),
   menuCard(foodString[2], 4.5),
 ];
 //TODO: USE CARD + FUTURE BUILDER to manage data card
