@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
@@ -25,12 +26,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 1;
   final SwiperController _swiperController = SwiperController();
-  late Future<Map<String, List<String>>> menuToday;
+  late Map<String, List<String>> menuToday;
   @override
   void initState() {
-    menuToday = getMenuData(6, 8);
-    print("menu : {$menuToday}");
     super.initState();
+    waitForData();
+  }
+
+  void waitForData() async {
+    menuToday = await getMenuData(6, 7);
+    print(menuToday);
   }
 
   @override
