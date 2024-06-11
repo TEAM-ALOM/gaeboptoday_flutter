@@ -24,7 +24,10 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
   late List<Map<String, List<String>>> receivedMenuData;
   @override
   void initState() {
-    receivedMenuData = menuJsonToStringList(widget.menuJsonData);
+    receivedMenuData = menuJsonToStringList(
+      jsonData: widget.menuJsonData,
+      isReaderRequest: true,
+    );
     print(receivedMenuData);
     super.initState();
   }

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_loading/card_loading.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -21,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   final SwiperController _swiperController = SwiperController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
