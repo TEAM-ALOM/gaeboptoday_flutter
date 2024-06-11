@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:gaeboptoday_flutter/controllers/circle_image.dart';
+import 'package:gaeboptoday_flutter/screens/utils/circle_image.dart';
 import 'package:gap/gap.dart';
 import 'package:like_button/like_button.dart';
 

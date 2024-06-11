@@ -2,8 +2,8 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:gaeboptoday_flutter/controllers/menu_json_to_string_list.dart';
-import 'package:gaeboptoday_flutter/controllers/menu_json_to_string_list.dart';
+import 'package:gaeboptoday_flutter/controllers/jsonDecoder.dart';
+import 'package:gaeboptoday_flutter/controllers/jsonDecoder.dart';
 import 'package:gaeboptoday_flutter/screens/cards/added_menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
 import 'package:gap/gap.dart';
@@ -65,14 +65,6 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
                   "메뉴를 제보해주셔서 감사합니다 :)",
                   minFontSize: 15,
                 ),
-                // ElevatedButton(
-                //     onPressed: () {
-                //       // print(dateIndex);
-                //       menuJsonToStringList(widget.menuJsonData);
-                //       // print(widget.menuJsonData);
-                //       // print(receivedMenuData[dateIndex]);
-                //     },
-                //     child: const Text("data")),
               ],
             ),
             const Gap(40),
@@ -83,28 +75,16 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
                   Radius.circular(20),
                 ),
               ),
-              // elevation: 1,
-              // decoration: const BoxDecoration(
-              //     // color: Colors.grey,
-              //     borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    // const AutoSizeText(
-                    //   "이번 주 계절밥상",
-                    //   minFontSize: 20,
-                    // ),
                     Center(
                       child: AnimatedToggleSwitch<int>.size(
                         current: dateIndex,
                         values: const [0, 1, 2, 3, 4],
                         iconOpacity: 0.3,
                         indicatorSize: const Size.fromWidth(100),
-                        // customStyleBuilder: (context, local, global) {
-                        //   return const ToggleStyle(
-                        //       backgroundColor: Colors.black);
-                        // },
                         customIconBuilder: (context, local, global) {
                           final text =
                               const ['월', '화', '수', '목', '금'][local.index];
@@ -124,18 +104,10 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
                         borderWidth: 4.0,
                         iconAnimationType: AnimationType.onHover,
                         style: ToggleStyle(
-                          // indicatorColor: Colors.blue,
                           backgroundColor: Colors.white,
                           borderColor: Colors.transparent,
                           borderRadius: BorderRadius.circular(25.0),
-                          boxShadow: [
-                            // const BoxShadow(
-                            //   color: Colors.black26,
-                            //   spreadRadius: 0,
-                            //   blurRadius: 0,
-                            //   offset: Offset(0, 0),
-                            // ),
-                          ],
+                          boxShadow: [],
                         ),
                         styleBuilder: (i) =>
                             ToggleStyle(indicatorColor: colorBuilder(i)),
@@ -179,9 +151,9 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
               child: const Text(
                 "홈으로 돌아가기",
                 style: TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                   fontSize: 13,
-                  // backgroundColor: Colors.blue,
                 ),
               ),
             ),

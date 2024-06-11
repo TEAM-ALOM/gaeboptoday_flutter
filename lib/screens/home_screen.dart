@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gaeboptoday_flutter/controllers/server_request.dart';
 import 'package:gaeboptoday_flutter/screens/cards/food_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
@@ -22,8 +23,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentIndex = 0;
+  int currentIndex = 1;
   final SwiperController _swiperController = SwiperController();
+  late Future<Map<String, List<String>>> menuToday;
+  @override
+  void initState() {
+    menuToday = getMenuData(6, 8);
+    print("menu : {$menuToday}");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: AppBar(
-          // backgroundColor: Colors.white,s
-          // backgroundColor: const Color(0x44000000),
           elevation: 0,
-          // title: const Text("Title"),
         ),
       ),
-      // backgroundColor: Colors.gr,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

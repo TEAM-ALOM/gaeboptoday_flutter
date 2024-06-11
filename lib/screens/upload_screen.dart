@@ -55,7 +55,7 @@ class _UploadScreenState extends State<UploadScreen> {
 // Generate filepath for saving
     imagePath = join((await getApplicationSupportDirectory()).path,
         "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
-    print(imagePath);
+    // print(imagePath);
     // Use below code for live camera detection with option to select from gallery in the camera feed.
     menuImage = File.fromUri(Uri.parse(imagePath));
     try {
@@ -73,7 +73,7 @@ class _UploadScreenState extends State<UploadScreen> {
     }
     if (cameraOpened) {
       setState(() {});
-      Uint8List bytes = menuImage.readAsBytesSync();
+      // Uint8List bytes = menuImage.readAsBytesSync();
       String fileName = menuImage.path.split('/').last;
       FormData formData = FormData.fromMap({
         "image": await MultipartFile.fromFile(imagePath,
@@ -92,9 +92,9 @@ class _UploadScreenState extends State<UploadScreen> {
             // print('$sent $total');
           },
         );
-        //TODO: SAVE CROPPED IMAGE DISABLE
-        ImageGallerySaver.saveImage(bytes);
-        print(response);
+        // // TODO: SAVE CROPPED IMAGE DISABLE
+        // ImageGallerySaver.saveImage(bytes);
+        // print(response);
         setState(() {
           //btn reset when shoot canceled
 
