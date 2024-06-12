@@ -1,11 +1,6 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:card_loading/card_loading.dart';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:dio/dio.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -25,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 1;
+  bool isLoaded = false;
   final SwiperController _swiperController = SwiperController();
   late Map<String, List<String>> menuToday;
   @override
@@ -33,9 +29,57 @@ class _HomeScreenState extends State<HomeScreen> {
     waitForData();
   }
 
+  List<Card> cardWidgetList = [
+    noDataCard("🙅🏻‍♂️", "현재 천원의 아침밥은 식단표 제공이 되지 않습니다."),
+    Card(
+      child: LoadingAnimationWidget.inkDrop(
+        color: Colors.blueAccent,
+        size: 30,
+      ),
+    ),
+    Card(
+      child: LoadingAnimationWidget.inkDrop(
+        color: Colors.blueAccent,
+        size: 30,
+      ),
+    ),
+  ];
   void waitForData() async {
-    menuToday = await getMenuData(6, 7);
-    print(menuToday);
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      cardWidgetList = [
+        noDataCard("⚠️", "인터넷이 연결을 확인해주세요"),
+        noDataCard("⚠️", "인터넷이 연결을 확인해주세요"),
+        noDataCard("⚠️", "인터넷이 연결을 확인해주세요"),
+      ];
+    } else {
+      menuToday = await getMenuData(6, 9);
+      setState(() {
+        print(menuToday['lunch']);
+        isLoaded = true;
+        cardWidgetList[1] = menuToday['lunch']!.isNotEmpty
+            ? menuCard(menuToday['lunch']!, 3.9)
+            : menuCard([
+                "딸기",
+                "당근",
+                "수박",
+                "제육볶음",
+                "메론",
+                "게임",
+                "딸기",
+                "당근",
+                "수박",
+                "참외",
+                "메론",
+                "게임"
+              ], 4.5);
+        // : noDataCard("", "등록된 데이터가 없습니다!");
+        cardWidgetList[2] = menuToday['dinner']!.isNotEmpty
+            ? menuCard(menuToday['dinner']!, 3.9)
+            : noDataCard("", "현재 천원의 아침밥은 식단표 제공이 되지 않습니다.");
+      });
+    }
   }
 
   @override
@@ -167,19 +211,3 @@ Color colorBuilder(int value) => switch (value) {
       2 => Colors.blueAccent,
       _ => Colors.blueAccent,
     };
-List<Card> cardWidgetList = [
-  noDataCard("현재 천원의 아침밥은 식단표 제공이 되지 않습니다."),
-  Card(
-    child: LoadingAnimationWidget.inkDrop(
-      color: Colors.blueAccent,
-      size: 30,
-    ),
-  ),
-  menuCard(foodString[2], 4.5),
-];
-//TODO: USE CARD + FUTURE BUILDER to manage data card
-List<List<String>> foodString = [
-  ["딸기", "당근", "수박", "제육볶음", "메론", "게임", "딸기", "당근", "수박", "참외", "메론", "게임"],
-  ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],
-  ["asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd"],
-];

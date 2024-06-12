@@ -92,7 +92,7 @@ class _UploadScreenState extends State<UploadScreen> {
             // print('$sent $total');
           },
         );
-        // // TODO: SAVE CROPPED IMAGE DISABLE
+        // // TODO: SAVE CROPP  ED IMAGE DISABLE
         // ImageGallerySaver.saveImage(bytes);
         // print(response);
         setState(() {
@@ -151,6 +151,21 @@ class _UploadScreenState extends State<UploadScreen> {
         title: const Text(
           "계절밥상 식단표 업로드",
           style: TextStyle(fontWeight: ui.FontWeight.bold, fontSize: 18),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: RoundedLoadingButton(
+          successColor: Colors.blueAccent,
+          color: Colors.blueAccent,
+          controller: _btnController,
+          onPressed: menuUpload,
+          child: const Text('업로드 시작 !',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+              )),
         ),
       ),
       body: Padding(
@@ -244,21 +259,8 @@ class _UploadScreenState extends State<UploadScreen> {
                           const Gap(5),
                         ],
                       )
-                    : const Gap(130),
+                    : const Gap(0),
             // Text(imagePath),
-
-            RoundedLoadingButton(
-              successColor: Colors.blueAccent,
-              color: Colors.blueAccent,
-              controller: _btnController,
-              onPressed: menuUpload,
-              child: const Text('업로드 시작 !',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
-                  )),
-            )
           ],
         ),
       ),

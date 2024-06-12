@@ -54,6 +54,8 @@ dependencies:
   percent_indicator: ^4.2.3
   card_loading: ^0.3.2
   loading_animation_widget: ^1.2.1
+  connectivity_plus: ^6.0.3
+  internet_connection_checker: ^1.0.0+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -44,6 +44,25 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: RoundedLoadingButton(
+          color: Colors.blueAccent,
+          controller: _roundedLoadingButtonController,
+          onPressed: () {
+            _roundedLoadingButtonController.success();
+            Navigator.pop(context);
+          },
+          child: const Text(
+            "홈으로 돌아가기",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -141,22 +160,6 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
               ),
             ),
             const Gap(20),
-            RoundedLoadingButton(
-              color: Colors.blueAccent,
-              controller: _roundedLoadingButtonController,
-              onPressed: () {
-                _roundedLoadingButtonController.success();
-                Navigator.pop(context);
-              },
-              child: const Text(
-                "홈으로 돌아가기",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                ),
-              ),
-            ),
           ],
         ),
       ),
