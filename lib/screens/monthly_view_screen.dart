@@ -173,6 +173,7 @@ class _MonthlyViewState extends State<MonthlyView> {
                   _focusedDay = selectedDay;
                   month = int.parse(DateFormat('M').format(selectedDay));
                   day = int.parse(DateFormat('d').format(selectedDay));
+
                   print("asdasd");
                   waitForInternet();
                 });

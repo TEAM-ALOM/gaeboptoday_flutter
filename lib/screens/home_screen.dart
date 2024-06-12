@@ -32,16 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<String> timeName = ["아침", "점심", "저녁"];
   int currentIndex = 1, initIndex = 1;
-  Map<String, String> formattedDate = {};
 
   @override
   void initState() {
-    formattedDate['month'] = DateFormat('M').format(now);
-    formattedDate['day'] = DateFormat('d').format(now);
-    formattedDate['hour'] = DateFormat('H').format(now);
-    formattedDate['minute'] = DateFormat('m').format(now);
-    timeCalculate = int.parse(formattedDate['hour']!) * 60 +
-        int.parse(formattedDate['minute']!);
+    timeCalculate = now.hour * 60 + now.minute;
     initIndex = (timeCalculate < 10 * 60 + 30)
         ? 0
         : (timeCalculate < 16 * 60 + 30)
@@ -102,9 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void dataLoad() async {
-    menuToday = await getMenuData(6, 7);
-    // menuToday = await getMenuData(
-    //     int.parse(formattedDate['month']!), int.parse(formattedDate['day']!));
+    // menuToday = await getMenuData(6, 7);
+    menuToday = await getMenuData(now.month, now.day);
     setState(() {
       print(menuToday['lunch']);
 
@@ -150,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
               ),
               Text(
-                "${formattedDate['month']}월 ${formattedDate['day']}일의 계절밥상입니다.",
+                "${now.month}월 ${now.day}일의 계절밥상입니다.",
                 style: const TextStyle(
                     fontWeight: FontWeight.normal, fontSize: 15),
               ),
