@@ -12,6 +12,7 @@ import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
 import 'package:gap/gap.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,14 +23,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late StreamSubscription<InternetConnectionStatus> listener;
-  int currentIndex = 1;
-  bool isLoaded = false;
+  final now = DateTime.now();
   final SwiperController _swiperController = SwiperController();
+
+  late int timeCalculate;
+  late StreamSubscription<InternetConnectionStatus> listener;
   late Map<String, List<String>> menuToday;
+
+  var isDeviceConnected = false;
+  List<String> timeName = ["아침", "점심", "저녁"];
+  int currentIndex = 1, initIndex = 1;
+  Map<String, String> formattedDate = {};
+
   @override
   void initState() {
-    print("init");
+    formattedDate['month'] = DateFormat('M').format(now);
+    formattedDate['day'] = DateFormat('d').format(now);
+    formattedDate['hour'] = DateFormat('H').format(now);
+    formattedDate['minute'] = DateFormat('m').format(now);
+    timeCalculate = int.parse(formattedDate['hour']!) * 60 +
+        int.parse(formattedDate['minute']!);
+    initIndex = (timeCalculate < 10 * 60 + 30)
+        ? 0
+        : (timeCalculate < 16 * 60 + 30)
+            ? 1
+            : 2;
+    currentIndex = initIndex;
     super.initState();
     waitForInternet();
   }
@@ -39,8 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
     listener.cancel();
     super.dispose();
   }
-
-  var isDeviceConnected = false;
 
   List<Card> cardWidgetList = [
     noDataCard(icon: "🙅🏻‍♂️", text: "현재 천원의 아침밥은 식단표 제공이 되지 않습니다."),
@@ -58,7 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
   void waitForInternet() async {
-    print("asd");
     listener = InternetConnectionChecker().onStatusChange.listen(
       (InternetConnectionStatus status) {
         switch (status) {
@@ -86,10 +102,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void dataLoad() async {
-    menuToday = await getMenuData(6, 9);
+    // menuToday = await getMenuData(6, 7);
+    menuToday = await getMenuData(
+        int.parse(formattedDate['month']!), int.parse(formattedDate['day']!));
     setState(() {
       print(menuToday['lunch']);
-      isLoaded = true;
+
       cardWidgetList[0] =
           noDataCard(icon: "🙅🏻‍♂️", text: "현재 천원의 아침밥은 식단표 제공이 되지 않습니다.");
       cardWidgetList[1] = menuToday['lunch']!.isNotEmpty
@@ -126,13 +144,15 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              const Text(
-                "좋은 아침이에요! 👨🏻‍🍳",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+              Text(
+                "좋은 ${timeName[initIndex]}이에요! 👨🏻‍🍳",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
               ),
-              const Text(
-                "오늘의 계밥 식단입니다.",
-                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
+              Text(
+                "${formattedDate['month']}월 ${formattedDate['day']}일의 계절밥상입니다.",
+                style: const TextStyle(
+                    fontWeight: FontWeight.normal, fontSize: 15),
               ),
               const SizedBox(height: 20),
               Center(

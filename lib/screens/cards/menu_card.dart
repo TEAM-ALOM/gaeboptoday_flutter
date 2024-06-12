@@ -19,13 +19,6 @@ Card menuCard(List<String> value, double rate) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // const Text(
-          //   "4월 30일 아침",
-          //   style: TextStyle(fontWeight: FontWeight.w800, fontSize: 25),
-          // ),
-          // const SizedBox(
-          //   height: 10,
-          // ),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -125,6 +118,11 @@ Card menuCard(List<String> value, double rate) {
               ],
             ),
           ),
+          // const Gap(5),
+          // const Text(
+          //   "점심 운영시간 : 10:30 ~ 16:30",
+          //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+          // ),
         ],
       ),
     ),
