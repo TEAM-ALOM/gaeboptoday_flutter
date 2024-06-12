@@ -17,7 +17,7 @@ Card addedMenuCard(Map<String, List<String>> value) {
 
   if (value['lunch']!.isEmpty) {
     //no data on holidays
-    return noDataCard("🙅🏻‍♂️", "공휴일은 운영하지 않습니다.");
+    return noDataCard(icon: "🙅🏻‍♂️", text: "공휴일은 운영하지 않습니다.");
   } else {
     return Card(
       color: Colors.white,

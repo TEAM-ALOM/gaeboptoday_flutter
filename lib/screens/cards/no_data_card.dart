@@ -2,7 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-Card noDataCard(String icon, String text) {
+Card noDataCard(
+    {required String icon, required String text, String? secondText}) {
   return Card(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -23,6 +24,14 @@ Card noDataCard(String icon, String text) {
           minFontSize: 13,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
+        secondText != null
+            ? AutoSizeText(
+                secondText,
+                minFontSize: 8,
+                style: const TextStyle(
+                    fontWeight: FontWeight.normal, fontSize: 12),
+              )
+            : const Gap(0),
       ],
     ),
   );

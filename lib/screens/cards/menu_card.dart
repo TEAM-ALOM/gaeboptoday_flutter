@@ -9,6 +9,8 @@ import 'package:gap/gap.dart';
 var fontSizeGroup = AutoSizeGroup();
 
 Card menuCard(List<String> value, double rate) {
+  int leftMenuLength = value.length ~/ 2;
+  int rightMenuLength = value.length - leftMenuLength;
   return Card(
     color: Colors.white,
     elevation: 1,
@@ -30,10 +32,10 @@ Card menuCard(List<String> value, double rate) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
-                  flex: 3,
+                  flex: 4,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -44,10 +46,11 @@ Card menuCard(List<String> value, double rate) {
                             child: ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 6,
+                              itemCount: leftMenuLength,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(bottom: 5.0),
+                                  padding: EdgeInsets.only(
+                                      bottom: leftMenuLength == 5 ? 8.0 : 5.0),
                                   child: AutoSizeText(
                                     maxLines: 2,
                                     value[index],
@@ -67,12 +70,13 @@ Card menuCard(List<String> value, double rate) {
                             child: ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 5,
+                              itemCount: rightMenuLength,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  padding: EdgeInsets.only(
+                                      bottom: rightMenuLength == 5 ? 8.0 : 5.0),
                                   child: AutoSizeText(
-                                    value[index + 5],
+                                    value[index + leftMenuLength],
                                     // minFontSize: 14,
                                     // group: fontSizeGroup,
                                     maxLines: 2,
@@ -92,7 +96,7 @@ Card menuCard(List<String> value, double rate) {
                   ),
                 ),
                 Flexible(
-                  flex: 2,
+                  flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,10 +104,11 @@ Card menuCard(List<String> value, double rate) {
                       Text(
                         rate.toString(),
                         style: const TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 45,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 37,
                         ),
                       ),
+                      // const Gap(3),
                       RatingBarIndicator(
                         rating: rate,
                         itemBuilder: (context, index) => const Icon(
@@ -111,7 +116,7 @@ Card menuCard(List<String> value, double rate) {
                           color: Colors.amber,
                         ),
                         itemCount: 5,
-                        itemSize: 22.0,
+                        itemSize: 12.0,
                         // direction: Axis.vertical,
                       ),
                     ],

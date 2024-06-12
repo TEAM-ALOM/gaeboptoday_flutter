@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dio/dio.dart';
 import 'package:edge_detection/edge_detection.dart';
@@ -14,7 +13,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gaeboptoday_flutter/screens/menu_data_confirm_screen.dart';
 import 'package:gap/gap.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -30,15 +28,14 @@ class UploadScreen extends StatefulWidget {
 
 class _UploadScreenState extends State<UploadScreen> {
   bool cameraOpened = false, errorOccured = false;
-  late int errorCode;
-  late String errorMessage, errorString;
+  int errorCode = 404;
+  String errorMessage = "NOT FOUND", errorString = "서버가 닫혀있습니다. 관리자에게 문의해주세요";
   String imagePath = "NOT OPENED";
   double percent = 0;
   late File menuImage;
   final dio = Dio();
   final RoundedLoadingButtonController _btnController =
       RoundedLoadingButtonController();
-
   void menuUpload() async {
     // Check permissions and request its
     bool isCameraGranted = await Permission.camera.request().isGranted;
@@ -154,7 +151,7 @@ class _UploadScreenState extends State<UploadScreen> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20.0),
+        padding: const EdgeInsets.only(bottom: 30.0),
         child: RoundedLoadingButton(
           successColor: Colors.blueAccent,
           color: Colors.blueAccent,
@@ -191,7 +188,7 @@ class _UploadScreenState extends State<UploadScreen> {
                   : (errorOccured
                       ? "❌ 읽는 중 에러가 발생하였습니다. ❌"
                       : "계절밥상 식단표를 촬영해주세요."),
-              minFontSize: 20,
+              minFontSize: 18,
               maxLines: 1,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -203,7 +200,8 @@ class _UploadScreenState extends State<UploadScreen> {
                       : "이미지 업로드를 위하여 카메라 권한을 허용해주세요!",
               minFontSize: 13,
               maxLines: 1,
-              style: const TextStyle(fontWeight: FontWeight.normal),
+              style:
+                  const TextStyle(fontWeight: FontWeight.normal, fontSize: 13),
             ),
             cameraOpened
                 ? Column(
@@ -230,36 +228,30 @@ class _UploadScreenState extends State<UploadScreen> {
                           progressColor: Colors.blueAccent,
                         ),
                       ),
-                      const Gap(90),
+                      // const Gap(90),
                     ],
                   )
                 : errorOccured
-                    ? Column(
-                        children: [
-                          const Gap(75),
-                          Container(
-                            decoration: const BoxDecoration(
-                                // color: Colors.orange,
-                                shape: BoxShape.rectangle,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: AutoSizeText(
-                                "ERROR $errorCode : $errorMessage (\"$errorString\")",
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: ui.FontWeight.w300,
-                                ),
-                                minFontSize: 10,
-                                maxLines: 1,
-                              ),
+                    ? Container(
+                        decoration: const BoxDecoration(
+                            // color: Colors.orange,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.all(Radius.circular(0))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: AutoSizeText(
+                            "ERROR $errorCode : $errorMessage (\"$errorString\")",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: ui.FontWeight.w300,
+                              fontSize: 10,
                             ),
+                            minFontSize: 10,
+                            maxLines: 1,
                           ),
-                          const Gap(5),
-                        ],
+                        ),
                       )
-                    : const Gap(0),
+                    : const Gap(30),
             // Text(imagePath),
           ],
         ),

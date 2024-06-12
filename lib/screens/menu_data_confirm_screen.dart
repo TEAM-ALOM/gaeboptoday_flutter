@@ -45,7 +45,7 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20.0),
+        padding: const EdgeInsets.only(bottom: 30.0),
         child: RoundedLoadingButton(
           color: Colors.blueAccent,
           controller: _roundedLoadingButtonController,

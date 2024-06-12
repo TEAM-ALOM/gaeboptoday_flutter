@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -9,6 +11,7 @@ import 'package:gaeboptoday_flutter/screens/cards/food_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
 import 'package:gap/gap.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,18 +22,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late StreamSubscription<InternetConnectionStatus> listener;
   int currentIndex = 1;
   bool isLoaded = false;
   final SwiperController _swiperController = SwiperController();
   late Map<String, List<String>> menuToday;
   @override
   void initState() {
+    print("init");
     super.initState();
-    waitForData();
+    waitForInternet();
   }
 
+  @override
+  void dispose() {
+    listener.cancel();
+    super.dispose();
+  }
+
+  var isDeviceConnected = false;
+
   List<Card> cardWidgetList = [
-    noDataCard("🙅🏻‍♂️", "현재 천원의 아침밥은 식단표 제공이 되지 않습니다."),
+    noDataCard(icon: "🙅🏻‍♂️", text: "현재 천원의 아침밥은 식단표 제공이 되지 않습니다."),
     Card(
       child: LoadingAnimationWidget.inkDrop(
         color: Colors.blueAccent,
@@ -44,42 +57,54 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     ),
   ];
-  void waitForData() async {
-    final List<ConnectivityResult> connectivityResult =
-        await (Connectivity().checkConnectivity());
-    if (connectivityResult.contains(ConnectivityResult.none)) {
+  void waitForInternet() async {
+    print("asd");
+    listener = InternetConnectionChecker().onStatusChange.listen(
+      (InternetConnectionStatus status) {
+        switch (status) {
+          case InternetConnectionStatus.connected:
+            print('Data connection is available.');
+            dataLoad();
+            break;
+          case InternetConnectionStatus.disconnected:
+            internetDisconnected();
+            print('You are disconnected from the internet.');
+            break;
+        }
+      },
+    );
+  }
+
+  void internetDisconnected() {
+    setState(() {
       cardWidgetList = [
-        noDataCard("⚠️", "인터넷이 연결을 확인해주세요"),
-        noDataCard("⚠️", "인터넷이 연결을 확인해주세요"),
-        noDataCard("⚠️", "인터넷이 연결을 확인해주세요"),
+        noDataCard(icon: "⚠️", text: "인터넷이 연결을 확인해주세요"),
+        noDataCard(icon: "⚠️", text: "인터넷이 연결을 확인해주세요"),
+        noDataCard(icon: "⚠️", text: "인터넷이 연결을 확인해주세요"),
       ];
-    } else {
-      menuToday = await getMenuData(6, 9);
-      setState(() {
-        print(menuToday['lunch']);
-        isLoaded = true;
-        cardWidgetList[1] = menuToday['lunch']!.isNotEmpty
-            ? menuCard(menuToday['lunch']!, 3.9)
-            : menuCard([
-                "딸기",
-                "당근",
-                "수박",
-                "제육볶음",
-                "메론",
-                "게임",
-                "딸기",
-                "당근",
-                "수박",
-                "참외",
-                "메론",
-                "게임"
-              ], 4.5);
-        // : noDataCard("", "등록된 데이터가 없습니다!");
-        cardWidgetList[2] = menuToday['dinner']!.isNotEmpty
-            ? menuCard(menuToday['dinner']!, 3.9)
-            : noDataCard("", "현재 천원의 아침밥은 식단표 제공이 되지 않습니다.");
-      });
-    }
+    });
+  }
+
+  void dataLoad() async {
+    menuToday = await getMenuData(6, 9);
+    setState(() {
+      print(menuToday['lunch']);
+      isLoaded = true;
+      cardWidgetList[1] = menuToday['lunch']!.isNotEmpty
+          ? menuCard(menuToday['lunch']!, 3.9)
+          : noDataCard(
+              icon: "👩🏻‍🍳",
+              text: "식당 휴무일 이거나 식단이 등록되지 않았습니다.",
+              secondText: "계절밥상은 토요일, 일요일, 공휴일에 쉽니다.",
+            );
+      cardWidgetList[2] = menuToday['dinner']!.isNotEmpty
+          ? menuCard(menuToday['dinner']!, 4.4)
+          : noDataCard(
+              icon: "👨🏻‍🍳",
+              text: "식당 휴무일 이거나 식단이 등록되지 않았습니다.",
+              secondText: "계절밥상은 토요일, 일요일, 공휴일에 쉽니다.",
+            );
+    });
   }
 
   @override
