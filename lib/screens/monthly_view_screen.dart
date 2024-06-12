@@ -40,6 +40,13 @@ class _MonthlyViewState extends State<MonthlyView> {
   }
 
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   void initState() {
     month = int.parse(DateFormat('M').format(now));
     day = int.parse(DateFormat('d').format(now));
@@ -105,7 +112,7 @@ class _MonthlyViewState extends State<MonthlyView> {
     // menuToday = await getMenuData(
     //     int.parse(formattedDate['month']!), int.parse(formattedDate['day']!));
     setState(() {
-      print(menuToday['lunch']);
+      // print(menuToday['lunch']);
 
       cardWidgetList[0] =
           noDataCard(icon: "🙅🏻‍♂️", text: "현재 천원의 아침밥은 식단표 제공이 되지 않습니다.");

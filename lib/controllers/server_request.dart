@@ -19,7 +19,7 @@ Future<Map<String, List<String>>> getMenuData(int month, int day) async {
         print('$sent $total');
       },
     );
-    // print(response);
+    // print(response.data);
     return menuJsonToStringList(
         jsonData: response.data, isReaderRequest: false)[0];
   } on DioException catch (e) {

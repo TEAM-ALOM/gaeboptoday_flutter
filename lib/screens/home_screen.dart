@@ -32,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<String> timeName = ["아침", "점심", "저녁"];
   int currentIndex = 1, initIndex = 1;
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   void initState() {
