@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late StreamSubscription<InternetConnectionStatus> listener;
   late Map<String, List<String>> menuToday;
 
-  var isDeviceConnected = false;
   List<String> timeName = ["아침", "점심", "저녁"];
   int currentIndex = 1, initIndex = 1;
   Map<String, String> formattedDate = {};
@@ -55,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    listener.cancel();
+    // listener.cancel();
     super.dispose();
   }
 
@@ -75,20 +74,21 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
   void waitForInternet() async {
-    listener = InternetConnectionChecker().onStatusChange.listen(
-      (InternetConnectionStatus status) {
-        switch (status) {
-          case InternetConnectionStatus.connected:
-            print('Data connection is available.');
-            dataLoad();
-            break;
-          case InternetConnectionStatus.disconnected:
-            internetDisconnected();
-            print('You are disconnected from the internet.');
-            break;
-        }
-      },
-    );
+    dataLoad();
+    // listener = InternetConnectionChecker().onStatusChange.listen(
+    //   (InternetConnectionStatus status) {
+    //     switch (status) {
+    //       case InternetConnectionStatus.connected:
+    //         print('Data connection is available.');
+    //         dataLoad();
+    //         break;
+    //       case InternetConnectionStatus.disconnected:
+    //         internetDisconnected();
+    //         print('You are disconnected from the internet.');
+    //         break;
+    //     }
+    //   },
+    // );
   }
 
   void internetDisconnected() {
@@ -102,9 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void dataLoad() async {
-    // menuToday = await getMenuData(6, 7);
-    menuToday = await getMenuData(
-        int.parse(formattedDate['month']!), int.parse(formattedDate['day']!));
+    menuToday = await getMenuData(6, 7);
+    // menuToday = await getMenuData(
+    //     int.parse(formattedDate['month']!), int.parse(formattedDate['day']!));
     setState(() {
       print(menuToday['lunch']);
 
@@ -253,8 +253,5 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 Color colorBuilder(int value) => switch (value) {
-      0 => Colors.blueAccent,
-      1 => Colors.blueAccent,
-      2 => Colors.blueAccent,
       _ => Colors.blueAccent,
     };
