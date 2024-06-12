@@ -90,6 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       print(menuToday['lunch']);
       isLoaded = true;
+      cardWidgetList[0] =
+          noDataCard(icon: "🙅🏻‍♂️", text: "현재 천원의 아침밥은 식단표 제공이 되지 않습니다.");
       cardWidgetList[1] = menuToday['lunch']!.isNotEmpty
           ? menuCard(menuToday['lunch']!, 3.9)
           : noDataCard(
