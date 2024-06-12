@@ -9,6 +9,7 @@ List<Map<String, List<String>>> menuJsonToStringList({
     dynamic contentMap = isReaderRequest
         ? jsonData['data']['result']['content']
         : jsonData['data'][0]['content'];
+
     List<Map<String, List<String>>> decodeResultList = [];
     List<String> temp = [];
     for (var date in date) {

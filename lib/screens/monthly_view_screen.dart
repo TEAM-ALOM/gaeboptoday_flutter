@@ -200,8 +200,8 @@ class _MonthlyViewState extends State<MonthlyView> {
                               current: dateIndex,
                               values: const [0, 1, 2],
                               iconOpacity: 0.3,
-                              height: 40,
-                              indicatorSize: const Size.fromWidth(80),
+                              height: 35,
+                              indicatorSize: const Size.fromWidth(70),
                               customIconBuilder: (context, local, global) {
                                 final text =
                                     const ['아침', '점심', '저녁'][local.index];
@@ -210,7 +210,7 @@ class _MonthlyViewState extends State<MonthlyView> {
                                   text,
                                   style: TextStyle(
                                     fontSize:
-                                        dateIndex != local.index ? 10 : 10,
+                                        dateIndex != local.index ? 11 : 11,
                                     color: Color.lerp(Colors.black,
                                         Colors.white, local.animationValue),
                                     fontWeight: dateIndex != local.index

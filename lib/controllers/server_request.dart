@@ -13,12 +13,13 @@ Future<Map<String, List<String>>> getMenuData(int month, int day) async {
       data: json.encode({
         'month': month,
         'day': day,
+        'type': 0,
       }),
       onSendProgress: (int sent, int total) {
-        // print('$sent $total');
+        print('$sent $total');
       },
     );
-    print(response.statusCode);
+    // print(response);
     return menuJsonToStringList(
         jsonData: response.data, isReaderRequest: false)[0];
   } on DioException catch (e) {
