@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
 import 'package:gaeboptoday_flutter/screens/monthly_view_screen.dart';
 import 'package:gaeboptoday_flutter/screens/mypage_screen.dart';
@@ -54,6 +55,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko', 'KR'),
+        // include country code too
+      ],
       title: '오늘의 계밥',
       theme: ThemeData(
         fontFamily: 'Pretendard',
