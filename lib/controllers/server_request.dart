@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:gaeboptoday_flutter/controllers/jsonDecoder.dart';
+import 'package:gaeboptoday_flutter/controllers/json_decoder.dart';
+import 'package:gaeboptoday_flutter/models/menu_model.dart';
 
-Future<Map<String, List<String>>> getMenuData(int month, int day) async {
+Future<MenuModel> getMenuData(int month, int day) async {
   Dio dio = Dio();
-
+  MenuModel menuData = MenuModel.init(month, day);
   try {
     final response = await dio.post(
       'http://52.79.88.147:3000/api/data',
@@ -20,8 +21,9 @@ Future<Map<String, List<String>>> getMenuData(int month, int day) async {
       },
     );
     // print(response.data);
-    return menuJsonToStringList(
-        jsonData: response.data, isReaderRequest: false)[0];
+    menuData =
+        menuJsonToStringList(jsonData: response.data, isReaderRequest: false);
+    return menuData;
   } on DioException catch (e) {
     if (e.response != null) {
       print(e.response!.data);
@@ -32,6 +34,6 @@ Future<Map<String, List<String>>> getMenuData(int month, int day) async {
       print(e.message);
     }
     print(e.error);
-    return {'lunch': [], 'dinner': []};
+    return menuData;
   }
 }

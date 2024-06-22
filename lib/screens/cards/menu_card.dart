@@ -3,14 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:gaeboptoday_flutter/models/menu_model.dart';
 import 'package:gap/gap.dart';
 
 // autosize group
 var fontSizeGroup = AutoSizeGroup();
 
-Card menuCard(List<String> value, double rate) {
-  int leftMenuLength = value.length ~/ 2;
-  int rightMenuLength = value.length - leftMenuLength;
+Card menuCard(Menu value) {
+  int leftMenuLength = value.length() ~/ 2;
+  int rightMenuLength = value.length() - leftMenuLength;
   return Card(
     color: Colors.white,
     elevation: 1,
@@ -46,7 +47,7 @@ Card menuCard(List<String> value, double rate) {
                                       bottom: leftMenuLength == 5 ? 8.0 : 5.0),
                                   child: AutoSizeText(
                                     maxLines: 2,
-                                    value[index],
+                                    value.menuList[index].name,
                                     // minFontSize: 14,
                                     // group: fontSizeGroup,
                                     style: const TextStyle(
@@ -69,7 +70,7 @@ Card menuCard(List<String> value, double rate) {
                                   padding: EdgeInsets.only(
                                       bottom: rightMenuLength == 5 ? 8.0 : 5.0),
                                   child: AutoSizeText(
-                                    value[index + leftMenuLength],
+                                    value.menuList[index + leftMenuLength].name,
                                     // minFontSize: 14,
                                     // group: fontSizeGroup,
                                     maxLines: 2,
@@ -95,7 +96,7 @@ Card menuCard(List<String> value, double rate) {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        rate.toString(),
+                        value.menuRate.toString(),
                         style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 37,
@@ -103,7 +104,7 @@ Card menuCard(List<String> value, double rate) {
                       ),
                       // const Gap(3),
                       RatingBarIndicator(
-                        rating: rate,
+                        rating: value.menuRate,
                         itemBuilder: (context, index) => const Icon(
                           Icons.star,
                           color: Colors.amber,

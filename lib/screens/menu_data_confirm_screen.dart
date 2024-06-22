@@ -2,8 +2,9 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:gaeboptoday_flutter/controllers/jsonDecoder.dart';
-import 'package:gaeboptoday_flutter/controllers/jsonDecoder.dart';
+import 'package:gaeboptoday_flutter/controllers/json_decoder.dart';
+import 'package:gaeboptoday_flutter/controllers/json_decoder.dart';
+import 'package:gaeboptoday_flutter/models/menu_model.dart';
 import 'package:gaeboptoday_flutter/screens/cards/added_menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
 import 'package:gap/gap.dart';
@@ -21,7 +22,7 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
   final SwiperController _swiperController = SwiperController();
   final RoundedLoadingButtonController _roundedLoadingButtonController =
       RoundedLoadingButtonController();
-  late List<Map<String, List<String>>> receivedMenuData;
+  late MenuModel receivedMenuData;
   @override
   void initState() {
     receivedMenuData = menuJsonToStringList(
@@ -143,7 +144,7 @@ class _MenuDataConfirmScreenState extends State<MenuDataConfirmScreen> {
                         loop: false,
                         itemBuilder: (BuildContext context, int index) {
                           // return Text(index.toString());
-                          return addedMenuCard(receivedMenuData[index]);
+                          return addedMenuCard(receivedMenuData);
                         },
                         onIndexChanged: (v) => setState(() {
                           dateIndex = v;

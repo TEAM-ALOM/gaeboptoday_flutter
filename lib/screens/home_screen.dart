@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gaeboptoday_flutter/controllers/server_request.dart';
+import 'package:gaeboptoday_flutter/models/menu_model.dart';
 import 'package:gaeboptoday_flutter/screens/cards/food_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late int timeCalculate;
   late StreamSubscription<InternetConnectionStatus> listener;
-  late Map<String, List<String>> menuToday;
+  late MenuModel menuToday;
 
   List<String> timeName = ["아침", "점심", "저녁"];
   int currentIndex = 1, initIndex = 1;
@@ -105,19 +106,17 @@ class _HomeScreenState extends State<HomeScreen> {
     // menuToday = await getMenuData(6, 7);
     menuToday = await getMenuData(now.month, now.day);
     setState(() {
-      print(menuToday['lunch']);
-
       cardWidgetList[0] =
           noDataCard(icon: "🙅🏻‍♂️", text: "현재 천원의 아침밥은 식단표 제공이 되지 않습니다.");
-      cardWidgetList[1] = menuToday['lunch']!.isNotEmpty
-          ? menuCard(menuToday['lunch']!, 3.9)
+      cardWidgetList[1] = menuToday.lunch.isNotEmpty()
+          ? menuCard(menuToday.lunch)
           : noDataCard(
               icon: "👩🏻‍🍳",
               text: "식당 휴무일 이거나 식단이 등록되지 않았습니다.",
               secondText: "계절밥상은 토요일, 일요일, 공휴일에 쉽니다.",
             );
-      cardWidgetList[2] = menuToday['dinner']!.isNotEmpty
-          ? menuCard(menuToday['dinner']!, 4.4)
+      cardWidgetList[2] = menuToday.dinner.isNotEmpty()
+          ? menuCard(menuToday.dinner)
           : noDataCard(
               icon: "👨🏻‍🍳",
               text: "식당 휴무일 이거나 식단이 등록되지 않았습니다.",

@@ -17,8 +17,8 @@ List<TabItem> items = [
     title: '월간계밥',
   ),
   const TabItem(
-    icon: Icons.star,
-    title: '리뷰',
+    icon: Icons.fastfood_rounded,
+    title: '전체메뉴',
   ),
   const TabItem(
     icon: Icons.account_circle,
@@ -122,6 +122,9 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
           }),
       body: viewWidgets[visit],
       bottomNavigationBar: BottomBarDefault(
+        // styleIconFooter: StyleIconFooter.divider,
+        top: 20,
+        // bottom: 40,
         items: items,
         backgroundColor: Colors.white,
         color: color,
@@ -132,7 +135,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
         }),
         // chipStyle: const ChipStyle(convexBridge: true),
         // itemStyle: ItemStyle.circle,
-        animated: true,
+        animated: false,
       ),
     );
   }

@@ -3,19 +3,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:gaeboptoday_flutter/models/menu_model.dart';
 import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
 import 'package:gap/gap.dart';
 
 // autosize group
 var fontSizeGroup = AutoSizeGroup();
+//TODO : MenuModel value ver change
+Card addedMenuCard(MenuModel value) {
+  int lunchLeft = value.lunch.length() ~/ 2;
+  int lunchRight = value.lunch.length() - lunchLeft;
+  int dinnerLeft = value.dinner.length() ~/ 2;
+  int dinnerRight = value.dinner.length() - dinnerLeft;
 
-Card addedMenuCard(Map<String, List<String>> value) {
-  int lunchLeft = value['lunch']!.length ~/ 2;
-  int lunchRight = value['lunch']!.length - lunchLeft;
-  int dinnerLeft = value['dinner']!.length ~/ 2;
-  int dinnerRight = value['dinner']!.length - dinnerLeft;
-
-  if (value['lunch']!.isEmpty) {
+  if (value.lunch.isEmpty()) {
     //no data on holidays
     return noDataCard(icon: "🙅🏻‍♂️", text: "공휴일은 운영하지 않습니다.");
   } else {
@@ -69,7 +70,7 @@ Card addedMenuCard(Map<String, List<String>> value) {
                               bottom: lunchLeft == 5 ? 8.0 : 5.0),
                           child: AutoSizeText(
                             maxLines: 1,
-                            value['lunch']![index],
+                            value.lunch.menuList[index].name,
                             // minFontSize: 14,
                             // group: fontSizeGroup,
                             style: const TextStyle(
@@ -91,7 +92,7 @@ Card addedMenuCard(Map<String, List<String>> value) {
                           padding: EdgeInsets.only(
                               bottom: lunchRight == 5 ? 8.0 : 5.0),
                           child: AutoSizeText(
-                            value['lunch']![index + lunchLeft],
+                            value.lunch.menuList[index + lunchLeft].name,
                             // minFontSize: 14,
                             // group: fontSizeGroup,
                             maxLines: 1,
@@ -151,7 +152,7 @@ Card addedMenuCard(Map<String, List<String>> value) {
                               bottom: dinnerLeft == 5 ? 8.0 : 5.0),
                           child: AutoSizeText(
                             maxLines: 1,
-                            value['dinner']![index],
+                            value.dinner.menuList[index].name,
                             // minFontSize: 14,
                             // group: fontSizeGroup,
                             style: const TextStyle(
@@ -173,7 +174,7 @@ Card addedMenuCard(Map<String, List<String>> value) {
                           padding: EdgeInsets.only(
                               bottom: dinnerRight == 5 ? 8.0 : 5.0),
                           child: AutoSizeText(
-                            value['dinner']![index + dinnerLeft],
+                            value.dinner.menuList[index + dinnerLeft].name,
                             // minFontSize: 14,
                             // group: fontSizeGroup,
                             maxLines: 1,
