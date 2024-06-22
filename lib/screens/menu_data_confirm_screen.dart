@@ -3,7 +3,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:gaeboptoday_flutter/controllers/json_decoder.dart';
-import 'package:gaeboptoday_flutter/controllers/json_decoder.dart';
 import 'package:gaeboptoday_flutter/models/menu_model.dart';
 import 'package:gaeboptoday_flutter/screens/cards/added_menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';

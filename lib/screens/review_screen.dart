@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gaeboptoday_flutter/screens/utils/circle_image.dart';
 import 'package:gap/gap.dart';
-import 'package:sliver_app_bar_builder/sliver_app_bar_builder.dart';
 
 class Review extends StatefulWidget {
   const Review({super.key});

@@ -9,33 +9,33 @@ MenuModel menuJsonToStringList({
   MenuModel decodeResult = MenuModel();
   print(dates);
   try {
-    dynamic contentMap =
-        isReaderRequest ? jsonData['data']['result']['content'] : null;
+    dynamic contentMap = isReaderRequest
+        ? jsonData['data']['result']['content']
+        : jsonData['data'];
 //jsonData['data']['content'][0]['lunch']
-    Menu temp = Menu();
+    Menu tempLunch = Menu(), tempDinner = Menu();
+    Food foodTemp;
     for (var date in dates) {
-      temp.clear();
-      // decodeResultList.add({});
-      for (var data in isReaderRequest
-          ? contentMap[date]['content'][0]['lunch']
-          : jsonData['data']['content'][0]['lunch']) {
-        temp.menuList.add(data['name']);
+      tempLunch.clear();
+
+      for (var data in contentMap[date]['content'][0]['lunch']) {
+        foodTemp = Food.init(data['name'], data['rating'], data['reviews']);
+        tempLunch.add(foodTemp);
       }
 
       //CALL BY REFERENSE & CALL BY VALUE
-      decodeResult.lunch = temp;
+      decodeResult.lunch = tempLunch;
 
-      temp.clear();
-      for (var data in isReaderRequest
-          ? contentMap[date]['content'][0]['dinner']
-          : jsonData['data']['content'][0]['dinner']) {
-        temp.menuList.add(data['name']);
+      tempDinner.clear();
+      for (var data in contentMap[date]['content'][0]['dinner']) {
+        foodTemp = Food.init(data['name'], data['rating'], data['reviews']);
+        tempDinner.add(foodTemp);
       }
-      decodeResult.dinner = temp;
+      decodeResult.dinner = tempDinner;
     }
-    // print(decodeResultList);
     return decodeResult;
   } catch (e) {
+    // print(e);
     return decodeResult;
   }
 }

@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gaeboptoday_flutter/models/menu_model.dart';
 import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
 import 'package:gap/gap.dart';

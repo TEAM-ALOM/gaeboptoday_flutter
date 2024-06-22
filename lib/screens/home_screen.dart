@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -13,7 +12,6 @@ import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
 import 'package:gap/gap.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatefulWidget {

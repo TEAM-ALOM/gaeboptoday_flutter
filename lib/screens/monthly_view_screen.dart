@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gaeboptoday_flutter/controllers/server_request.dart';
 import 'package:gaeboptoday_flutter/models/menu_model.dart';
-import 'package:gaeboptoday_flutter/screens/cards/added_menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/menu_card.dart';
 import 'package:gaeboptoday_flutter/screens/cards/no_data_card.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
