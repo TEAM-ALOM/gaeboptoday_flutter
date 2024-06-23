@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gaeboptoday_flutter/controllers/get_menu.dart';
 import 'package:gaeboptoday_flutter/models/menu_model.dart';
 import 'package:gaeboptoday_flutter/screens/cards/food_card.dart';
-import 'package:gaeboptoday_flutter/screens/utils/circle_image.dart';
 import 'package:gap/gap.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
