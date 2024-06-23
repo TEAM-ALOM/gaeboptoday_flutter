@@ -19,16 +19,19 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(0),
-        child: AppBar(
-          elevation: 0,
+      appBar: AppBar(
+        // elevation: 0,
+        title: const Text(
+          "로그인",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
         ),
       ),
       body: Scaffold(
         appBar: AppBar(
           toolbarHeight: 0,
-          title: const Text("asd"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -36,32 +39,48 @@ class _MyPageState extends State<MyPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextField(
-                controller: _idInputController,
-                decoration: const InputDecoration(
-                  hintText: "ID",
+              // const Text("학사정보시스템 계정으로 로그인해주세요"),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  onTapOutside: (PointerDownEvent event) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  controller: _idInputController,
+                  decoration: const InputDecoration(
+                    hintText: "ID",
+                  ),
+                  textInputAction: TextInputAction.next,
+                  enableSuggestions: false,
+                  keyboardType: TextInputType.number,
                 ),
-                textInputAction: TextInputAction.next,
-                enableSuggestions: false,
-                keyboardType: TextInputType.number,
               ),
               const Gap(10),
-              TextField(
-                controller: _passwordInputController,
-                decoration: const InputDecoration(
-                  hintText: "PASSWORD",
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextField(
+                  onTapOutside: (PointerDownEvent event) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  controller: _passwordInputController,
+                  decoration: const InputDecoration(
+                    hintText: "PASSWORD",
+                  ),
+                  obscureText: true,
+                  textInputAction: TextInputAction.join,
+                  onSubmitted: (value) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    _roundedLoadingButtonController.reset();
+                  },
                 ),
-                obscureText: true,
-                textInputAction: TextInputAction.join,
-                onSubmitted: (value) {
-                  _roundedLoadingButtonController.reset();
-                },
               ),
-              const Gap(20),
+              const Gap(80),
               RoundedLoadingButton(
                   color: Colors.blueAccent,
                   controller: _roundedLoadingButtonController,
-                  onPressed: () {},
+                  onPressed: () {
+                    //TODO : LOGIN
+                  },
                   child: const Text(
                     "Login",
                     style: TextStyle(color: Colors.white),

@@ -1,9 +1,16 @@
 class Review {
-  int writer = 0;
+  String writer = "";
   double rate = 0;
   String review = "";
+  DateTime? dateTime;
   Review();
-  Review.init(this.writer, this.rate, this.review);
+  // Review.init(this.writer, this.rate, this.review);
+  Review.init(
+    this.writer,
+    this.rate,
+    this.review,
+    this.dateTime,
+  );
 }
 
 class Food {
@@ -13,27 +20,32 @@ class Food {
   List<Review> foodReview = [];
   bool isFavorite = false;
 
+  void addReview(Review value) {
+    foodReview.add(value);
+  }
+
   Food();
   Food.nodata() {
     name = "NO DATA";
   }
-  Food.init(name, rate, foodReview) {
+  Food.init(
+    name,
+    rate,
+    // foodReview,
+  ) {
     this.name = name.toString();
-    this.rate = double.tryParse(rate.toString()) ?? 0;
-    try {
-      for (var data in foodReview) {
-        this.foodReview.add(Review.init(
-            int.tryParse(data['writer_id'].toString()) ?? 0,
-            double.tryParse(data['rate'].toString()) ?? 0,
-            data['substance']));
-      }
-    } catch (e) {
-      print(e);
-    } finally {
-      this.foodReview = [];
-    }
+    // this.rate = double.tryParse(rate.toString()) ?? 0;
+    // try {
+    //   for (var data in foodReview) {
+    //     this.foodReview.add(Review.init(data['nickname'].toString(),
+    //         double.tryParse(data['rate'].toString()) ?? 0, data['substance']));
+    //   }
+    // } catch (e) {
+    //   print(e);
+    // } finally {
+    //   this.foodReview = [];
+    // }
   }
-
   Food.img(this.name, this.rate, this.imagePath);
 }
 

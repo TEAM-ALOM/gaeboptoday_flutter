@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gaeboptoday_flutter/models/menu_model.dart';
+import 'package:gaeboptoday_flutter/screens/food_details.dart';
 import 'package:gaeboptoday_flutter/screens/utils/circle_image.dart';
 import 'package:gap/gap.dart';
 
@@ -16,16 +17,7 @@ OpenContainer foodCard(Food value) {
     closedElevation: 1,
     openBuilder: (context, __) {
       return SwipeToDismissWrap(
-        child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 0,
-          ),
-          body: const SingleChildScrollView(
-            child: Column(
-              children: [],
-            ),
-          ),
-        ),
+        child: FoodDetails(value),
       );
     },
     closedBuilder: (context, action) {

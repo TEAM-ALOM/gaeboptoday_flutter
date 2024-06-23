@@ -19,7 +19,11 @@ MenuModel menuJsonToStringList({
       tempLunch.clear();
 
       for (var data in contentMap[date]['content'][0]['lunch']) {
-        foodTemp = Food.init(data['name'], data['rating'], data['reviews']);
+        foodTemp = Food.init(
+          data['name'],
+          data['rating'],
+          // data['reviews'],
+        );
         tempLunch.add(foodTemp);
       }
 
@@ -28,7 +32,11 @@ MenuModel menuJsonToStringList({
 
       tempDinner.clear();
       for (var data in contentMap[date]['content'][0]['dinner']) {
-        foodTemp = Food.init(data['name'], data['rating'], data['reviews']);
+        foodTemp = Food.init(
+          data['name'],
+          data['rating'],
+          // data['reviews'],
+        );
         tempDinner.add(foodTemp);
       }
       decodeResult.dinner = tempDinner;
