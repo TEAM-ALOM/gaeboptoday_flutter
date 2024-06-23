@@ -5,8 +5,10 @@ Widget circleImage(String value, double height, bool isNetwork) {
     borderRadius: BorderRadius.circular(100.0),
     child: isNetwork
         ? Image.network(
-            'htt',
+            value,
             height: height,
+            width: height,
+            fit: BoxFit.fitHeight,
             errorBuilder: (context, error, stackTrace) {
               return Image.asset(
                 'assets/images/defaultImg.png',

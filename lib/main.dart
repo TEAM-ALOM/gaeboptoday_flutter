@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gaeboptoday_flutter/screens/home_screen.dart';
 import 'package:gaeboptoday_flutter/screens/monthly_view_screen.dart';
 import 'package:gaeboptoday_flutter/screens/mypage_screen.dart';
-import 'package:gaeboptoday_flutter/screens/review_screen.dart';
+import 'package:gaeboptoday_flutter/screens/all_menus_screen.dart';
 import 'package:gaeboptoday_flutter/screens/upload_screen.dart';
 
 List<TabItem> items = [
@@ -32,7 +32,7 @@ List<TabItem> items = [
 const List<Widget> viewWidgets = [
   HomeScreen(),
   MonthlyView(),
-  Review(),
+  AllMenusScreen(),
   MyPage(),
 ];
 // 사용가능한 카메라 장치의 목록을 저장하는 변수

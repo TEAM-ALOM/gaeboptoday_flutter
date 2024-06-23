@@ -245,17 +245,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     thickness: 0,
                   ),
                   shrinkWrap: true,
-                  itemCount: 5,
+                  itemCount: foodData.length,
                   itemBuilder: (context, index) {
                     //TODO : change default data algorithm
                     return foodData[index].name == "NO DATA"
-                        ? Card(
-                            child: SizedBox(
-                              width: 150,
-                              child: Center(
-                                child: LoadingAnimationWidget.inkDrop(
-                                  color: Colors.blueAccent,
-                                  size: 30,
+                        ? Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Card(
+                              child: SizedBox(
+                                width: 150,
+                                child: Center(
+                                  child: LoadingAnimationWidget.inkDrop(
+                                    color: Colors.blueAccent,
+                                    size: 30,
+                                  ),
                                 ),
                               ),
                             ),
