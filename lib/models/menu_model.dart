@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class Review {
   int writer = 0;
   double rate = 0;

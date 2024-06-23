@@ -245,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     thickness: 0,
                   ),
                   shrinkWrap: true,
-                  itemCount: foodData.length,
+                  itemCount: 5,
                   itemBuilder: (context, index) {
                     //TODO : change default data algorithm
                     return foodData[index].name == "NO DATA"

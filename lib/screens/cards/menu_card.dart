@@ -96,7 +96,7 @@ Card menuCard(Menu value) {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        value.menuRate.toString(),
+                        value.menuRate.toStringAsFixed(1),
                         style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 37,
