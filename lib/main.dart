@@ -18,7 +18,7 @@ List<TabItem> items = [
   ),
   const TabItem(
     icon: Icons.fastfood_rounded,
-    title: '전체메뉴',
+    title: '메뉴',
   ),
   const TabItem(
     icon: Icons.account_circle,

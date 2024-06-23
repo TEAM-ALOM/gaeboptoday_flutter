@@ -48,7 +48,7 @@ class _ReviewState extends State<Review> {
                         Flexible(
                             flex: 1,
                             child: circleImage(
-                                'assets/images/test_food.jpg', 100)),
+                                'assets/images/test_food.jpg', 100, false)),
                         const Gap(15),
                         Flexible(
                           flex: 2,

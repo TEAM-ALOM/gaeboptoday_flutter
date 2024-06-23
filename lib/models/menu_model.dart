@@ -9,14 +9,16 @@ class Review {
 }
 
 class Food {
-  Image? image;
+  String imagePath = 'assets/images/defaultImg.png';
   String name = "";
   double rate = 0;
   List<Review> foodReview = [];
   bool isFavorite = false;
 
   Food();
-
+  Food.nodata() {
+    name = "NO DATA";
+  }
   Food.init(name, rate, foodReview) {
     this.name = name.toString();
     this.rate = double.tryParse(rate.toString()) ?? 0;
@@ -33,6 +35,8 @@ class Food {
       this.foodReview = [];
     }
   }
+
+  Food.img(this.name, this.rate, this.imagePath);
 }
 
 class Menu {

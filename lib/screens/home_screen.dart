@@ -5,6 +5,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gaeboptoday_flutter/controllers/get_menu.dart';
 import 'package:gaeboptoday_flutter/controllers/server_request.dart';
 import 'package:gaeboptoday_flutter/models/menu_model.dart';
 import 'package:gaeboptoday_flutter/screens/cards/food_card.dart';
@@ -28,7 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
   late int timeCalculate;
   late StreamSubscription<InternetConnectionStatus> listener;
   late MenuModel menuToday;
-
+  List<Food> foodData = [
+    Food.nodata(),
+    Food.nodata(),
+    Food.nodata(),
+    Food.nodata(),
+    Food.nodata(),
+  ];
   List<String> timeName = ["아침", "점심", "저녁"];
   int currentIndex = 1, initIndex = 1;
   @override
@@ -101,6 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void dataLoad() async {
+    foodData = await getAllFoodData();
+    setState(() {});
     // menuToday = await getMenuData(6, 7);
     menuToday = await getMenuData(now.month, now.day);
     setState(() {
@@ -228,16 +237,34 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    foodCard(),
-                    foodCard(),
-                    foodCard(),
-                    foodCard(),
-                    foodCard(),
-                  ],
+              SizedBox(
+                height: 200,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (context, index) => const Divider(
+                    thickness: 0,
+                  ),
+                  shrinkWrap: true,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    //TODO : change default data algorithm
+                    return foodData[index].name == "NO DATA"
+                        ? Card(
+                            child: SizedBox(
+                              width: 150,
+                              child: Center(
+                                child: LoadingAnimationWidget.inkDrop(
+                                  color: Colors.blueAccent,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: foodCard(foodData[index]),
+                          );
+                  },
                 ),
               ),
             ],
