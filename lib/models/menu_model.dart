@@ -11,6 +11,9 @@ class Review {
     this.review,
     this.dateTime,
   );
+  int roundRate() {
+    return rate.round();
+  }
 }
 
 class Food {
@@ -22,6 +25,14 @@ class Food {
 
   void addReview(Review value) {
     foodReview.add(value);
+  }
+
+  List<int> rateList() {
+    List<int> resultList = [0, 0, 0, 0, 0, 0];
+    for (var data in foodReview) {
+      resultList[data.roundRate()]++;
+    }
+    return resultList;
   }
 
   Food();
